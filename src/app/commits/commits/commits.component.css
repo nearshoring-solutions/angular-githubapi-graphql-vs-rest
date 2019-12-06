@@ -1,0 +1,27 @@
+mat-card {
+  width: 1000px;
+}
+
+.commits-card {
+  background-color: #d3d3d3;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+mat-select {
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+table {
+  width: 100%;
+}
+
+.table-card {
+  overflow: auto;
+}
+
+.wrapper {
+  padding-left: 10%;
+  padding-right: 10%;
+}
