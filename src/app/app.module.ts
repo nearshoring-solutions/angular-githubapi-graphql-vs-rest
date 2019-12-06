@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/material/material.module';
+import { CommitsModule } from './commits/commits.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MaterialModule } from './shared/material/material.module';
     CoreModule,
     MaterialModule,
     BrowserAnimationsModule,
+    CommitsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

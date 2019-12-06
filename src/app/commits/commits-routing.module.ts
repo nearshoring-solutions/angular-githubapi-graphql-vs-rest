@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CommitsComponent } from './commits/commits.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./commits/commits.module').then(m => m.CommitsModule)
+    component: CommitsComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class CommitsRoutingModule { }
