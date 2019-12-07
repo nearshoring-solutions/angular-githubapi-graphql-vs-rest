@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { ReposQuery, CommitsQuery } from '../';
 import { Repo, Commit } from '../../shared';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { of } from 'rxjs';
+import { ApolloQueryResult } from 'apollo-client';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +12,8 @@ import { Repo, Commit } from '../../shared';
 export class GraphqlService {
   constructor(
     private reposQuery: ReposQuery,
-    private commitsQuery: CommitsQuery
+    private commitsQuery: CommitsQuery,
+    private snackBar: MatSnackBar
   ) {}
 
   // tslint:disable-next-line:variable-name
@@ -18,7 +22,11 @@ export class GraphqlService {
       user: _user
     })
     .valueChanges.pipe(
-      map(res => {
+      catchError(err => {
+        this.errorHandling('Error retrieving the Repos.');
+        return of([]);
+      }),
+      map((res: ApolloQueryResult<any>) => {
         const repos: any[] = res.data.user.repositories.nodes;
         return repos.map(repo => {
           return new Repo(repo.id, repo.name);
@@ -34,7 +42,11 @@ export class GraphqlService {
       repo: _repo
     })
     .valueChanges.pipe(
-      map(res => {
+      catchError(err => {
+        this.errorHandling('Error retrieving the Commits.');
+        return of([]);
+      }),
+      map((res: ApolloQueryResult<any>) => {
         const commits: any[] = res.data.repository.ref.target.history.edges;
         return commits.map(commit => {
           return new Commit(
@@ -46,5 +58,11 @@ export class GraphqlService {
         });
       })
     );
+  }
+
+  errorHandling(message: string) {
+    this.snackBar.open(message, 'OK', {
+      duration: 2000
+    });
   }
 }
