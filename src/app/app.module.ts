@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './shared/material/material.module';
 import { CommitsModule } from './commits/commits.module';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { CommitsModule } from './commits/commits.module';
     MaterialModule,
     BrowserAnimationsModule,
     CommitsModule,
+    GraphQLModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
